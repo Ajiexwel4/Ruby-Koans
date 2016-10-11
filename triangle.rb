@@ -15,17 +15,16 @@
 #
 def triangle(a, b, c)
   # WRITE THIS CODE
-  return :equilateral if a == b && b == c 
-  return :isosceles   if a == b || b == c || a == c and a != b || b != c || a != c
-  return :scalene 	  if a != b && b != c && a != c
+  x,y,z = [a,b,c].sort
+  raise TriangleError if x + y <= z
 
-  raise TriangleError do 
-  	"Lengths of the sides doesn't be a zero or negative"                    if a <= 0 || b <= 0 || c <= 0 
-  	
-  	x, y, z = [a,b,c].sort
-  	"Any two sides of a triangle should add up to more than the third side" if x + y <= z 
+  if a == b && a == c
+    :equilateral
+  elsif a == b || b == c || a == c
+    :isosceles
+  else
+    :scalene
   end
-  
 end
 
 # Error class used in part 2.  No need to change this code.
